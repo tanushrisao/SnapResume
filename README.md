@@ -1,62 +1,115 @@
 # ⚡ SnapResume — AI Resume Analyzer
 
-A web app that instantly analyzes your resume against any job description 
-using Google's Gemini AI. Built for students and freshers who want to know 
-exactly why they're getting rejected — and how to fix it.
+> An AI-powered web app that scores your resume against any job description, highlights missing keywords, rewrites weak bullet points, and gives ATS tips — instantly.
 
-## 🎯 What it does
+🔗 **Live Demo:** https://snapresume.onrender.com *(update this link after deployment)*
 
-- **ATS Score** — Scores your resume 0–100 against the job description
-- **Keyword Analysis** — Shows which important keywords are present ✅ and which are missing ❌
-- **Bullet Point Rewriter** — Rewrites weak bullet points with strong action verbs and metrics
-- **ATS Tips** — Gives specific formatting advice to pass Applicant Tracking Systems
-- **Download Report** — Export your full analysis as a text file
+---
 
-## 🛠️ Built With
+## 🎯 What It Does
 
-- **Python + Flask** — Backend REST API
-- **Google Gemini AI API** — Resume analysis and rewriting
-- **HTML + CSS + JavaScript** — Frontend UI with animated score ring
-- **Render** — Cloud deployment
+Most students don't know why they're getting rejected. They send the same resume everywhere and hear nothing back. SnapResume fixes that.
+
+Paste your resume + any job description → get an instant analysis:
+
+- 🎯 **ATS Match Score** — 0 to 100 score showing how well your resume matches the job
+- ✅ **Present Keywords** — important skills you already have that match the JD
+- ❌ **Missing Keywords** — skills mentioned in the JD that are absent from your resume
+- ✏️ **Bullet Point Rewriter** — rewrites weak bullets ("worked on", "helped with") into strong, metric-driven ones
+- 💡 **ATS Tips** — specific formatting advice to pass Applicant Tracking Systems
+- 📥 **Download Report** — export your full analysis as a text file
+
+---
+
+## 🛠️ Tech Stack
+
+| Layer | Technology |
+|-------|-----------|
+| Backend | Python, Flask |
+| AI | Google Gemini API (gemini-2.5-flash) |
+| Frontend | HTML, CSS, Vanilla JavaScript |
+| Deployment | Render |
+
+---
 
 ## 🚀 Run Locally
 
-1. Clone the repo
-   git clone https://github.com/YOURUSERNAME/snapresume.git
-   cd snapresume
+**1. Clone the repository**
+```bash
+git clone https://github.com/tanushrisao/SnapResume.git
+cd SnapResume
+```
 
-2. Create and activate virtual environment
-   python -m venv venv
-   venv\Scripts\activate       # Windows
-   source venv/bin/activate    # Mac/Linux
+**2. Create and activate virtual environment**
+```bash
+python -m venv venv
 
-3. Install dependencies
-   pip install -r requirements.txt
+# Windows
+venv\Scripts\activate
 
-4. Add your Gemini API key
-   Create a .env file in the root folder:
-   GEMINI_API_KEY=your_key_here
-   Get a free key at: https://aistudio.google.com
+# Mac/Linux
+source venv/bin/activate
+```
 
-5. Run the app
-   python app.py
-   Open http://127.0.0.1:5000 in your browser
+**3. Install dependencies**
+```bash
+pip install -r requirements.txt
+```
+
+**4. Get a free Gemini API key**
+
+Go to https://aistudio.google.com → Sign in → Get API Key → Create new key
+
+**5. Create a `.env` file in the project root**
+```
+GEMINI_API_KEY=paste_your_key_here
+```
+
+**6. Run the app**
+```bash
+python app.py
+```
+
+Open http://127.0.0.1:5000 in your browser.
+
+---
 
 ## 📁 Project Structure
 
-snapresume/
-├── app.py              # Flask backend + Gemini API integration
+```
+SnapResume/
+├── app.py              ← Flask backend + Gemini API integration
 ├── templates/
-│   └── index.html      # Main UI
+│   └── index.html      ← Main UI page
 ├── static/
-│   ├── style.css       # Styling
-│   └── script.js       # Frontend logic
-├── .env                # API key (not uploaded to GitHub)
-├── .gitignore
-└── requirements.txt
+│   ├── style.css       ← Styling and animations
+│   └── script.js       ← Frontend logic, fetch calls, DOM rendering
+├── .env                ← Your API key (never uploaded to GitHub)
+├── .gitignore          ← Ignores venv, .env, pycache
+├── requirements.txt    ← Python dependencies
+└── README.md           ← You are here
+```
 
-## 👨‍💻 Author
+---
 
-Your Name — 2nd Year ECE Student, IIIT Dharwad
-GitHub: github.com/YOURUSERNAME
-LinkedIn: linkedin.com/in/YOURUSERNAME
+## 💡 How It Works
+
+1. User pastes resume text + job description into the web app
+2. JavaScript sends both to the Flask backend via a POST request
+3. Flask builds a structured prompt and calls the Gemini AI API
+4. Gemini returns a JSON object with score, keywords, rewritten bullets, and tips
+5. JavaScript parses the JSON and renders the animated results panel
+
+---
+
+## 👩‍💻 Author
+
+**Tanushri Sao**
+2nd Year ECE Student — IIIT Dharwad
+
+- GitHub: @tanushrisao
+- LinkedIn: https://github.com/tanushrisao
+
+---
+
+## ⭐ If this helped you, give it a star on GitHub!
