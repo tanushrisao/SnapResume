@@ -1,29 +1,94 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SnapResume</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SnapResume — AI Resume Analyzer</title>
+  <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
 
-    <h1>SnapResume</h1>
+  <header>
+    <div class="logo">⚡ SnapResume</div>
+    <div class="tagline">AI-powered ATS Resume Analyzer</div>
+  </header>
 
-    <textarea id="resume" placeholder="Paste Resume"></textarea>
+  <main class="container">
 
-    <br><br>
+    <!-- LEFT PANEL -->
+    <div class="left-panel">
+      <div class="input-group">
+        <label for="resume">📄 Your Resume</label>
+        <textarea id="resume" placeholder="Paste your full resume text here...&#10;&#10;Include education, skills, projects, and experience."></textarea>
+      </div>
+      <div class="input-group">
+        <label for="job">💼 Job Description</label>
+        <textarea id="job" placeholder="Paste the job description here...&#10;&#10;Copy the full JD from LinkedIn, Internshala, etc."></textarea>
+      </div>
+      <button id="analyzeBtn" onclick="analyzeResume()">
+        <span id="btnText">⚡ Analyze Resume</span>
+        <span id="btnLoader" class="hidden">⏳ Analyzing...</span>
+      </button>
+      <p id="errorMsg" class="error-msg hidden"></p>
+    </div>
 
-    <textarea id="job" placeholder="Paste Job Description"></textarea>
+    <!-- RIGHT PANEL -->
+    <div class="right-panel">
 
-    <br><br>
+      <div id="placeholder" class="placeholder-state">
+        <div class="placeholder-icon">🎯</div>
+        <p>Paste your resume and a job description,<br>then click <strong>Analyze Resume</strong></p>
+      </div>
 
-    <button onclick="analyzeResume()">Analyze</button>
+      <div id="results" class="hidden">
 
-    <h2>Result:</h2>
+        <!-- SCORE RING -->
+        <div class="score-section">
+          <div class="score-ring-wrap">
+            <svg class="score-ring" viewBox="0 0 120 120">
+              <circle class="ring-bg" cx="60" cy="60" r="50"/>
+              <circle class="ring-fill" id="ringFill" cx="60" cy="60" r="50"
+                stroke-dasharray="314"
+                stroke-dashoffset="314"/>
+            </svg>
+            <div class="score-number" id="scoreNumber">0</div>
+          </div>
+          <div class="score-info">
+            <div class="score-label">ATS Match Score</div>
+            <p class="score-reason" id="scoreReason"></p>
+          </div>
+        </div>
 
-    <div id="result"></div>
+        <!-- KEYWORDS -->
+        <div class="section">
+          <h3>✅ Present Keywords</h3>
+          <div id="presentKeywords" class="keyword-row"></div>
+        </div>
 
-    <script src="/static/script.js"></script>
+        <div class="section">
+          <h3>❌ Missing Keywords</h3>
+          <div id="missingKeywords" class="keyword-row"></div>
+        </div>
 
+        <!-- BULLET REWRITES -->
+        <div class="section">
+          <h3>✏️ Rewritten Bullet Points</h3>
+          <div id="weakBullets"></div>
+        </div>
+
+        <!-- ATS TIPS -->
+        <div class="section">
+          <h3>💡 ATS Tips</h3>
+          <ul id="atsTips" class="tips-list"></ul>
+        </div>
+
+        <button class="download-btn" onclick="downloadReport()">📥 Download Report</button>
+
+      </div>
+    </div>
+
+  </main>
+
+  <script src="/static/script.js"></script>
 </body>
 </html>
