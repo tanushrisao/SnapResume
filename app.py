@@ -11,7 +11,7 @@ from google import genai
 app = Flask(__name__, static_folder="static", template_folder="templates")
 CORS(app)
 
-GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY", "AIzaSyAnogBTY4Qbe11ByM9QTzkjzF5udbOOekU")
+GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY", "")
 client = genai.Client(api_key=GEMINI_API_KEY)
 
 PROMPT_TEMPLATE = """You are an expert ATS (Applicant Tracking System) resume reviewer with 10 years of experience in tech hiring.
